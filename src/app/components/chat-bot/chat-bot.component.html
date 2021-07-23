@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="closeModal()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>ChatBot</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngFor="let item of stackMensajes;">
+    <ion-item *ngIf="!item.Usuario" lines="none">
+      <ion-chip>
+        <ion-label color="secondary">{{ item.Mensaje }}</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-item *ngFor="let subMensaje of item.SubMensajes;"  lines="none">
+      <ion-chip>
+        <ion-label color="secondary">{{ subMensaje.Mensaje }}</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-item *ngFor="let resultado of item.Resultados;"  lines="none">
+      <ion-chip>
+        <div *ngFor="let itemResultado of resultado;">
+          <p><strong>{{ itemResultado.Campo }}:</strong> {{ itemResultado.Valor }}</p>
+        </div>
+      </ion-chip>
+    </ion-item>
+    <a *ngIf="item.BotonEnlace" [href]="item.BotonEnlace.Url">
+      <ion-button>{{ item.BotonEnlace.Texto }}</ion-button>
+    </a>
+    <ion-item *ngIf="item.Usuario" lines="none">
+      <ion-chip color="secondary" slot="end">
+        <ion-label color="dark">{{ item.TextoUsuario }}</ion-label>
+      </ion-chip>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-item>
+    <ion-label position="floating"> Escribe tu respuesta</ion-label>
+    <ion-input type="text" [(ngModel)]="chatInput" (keydown.enter)="enviarInpunt()"></ion-input>
+  </ion-item>
+  <ion-button color="primary" expand="block" [disabled]="!chatInput || !chatInput?.length > 0" (click)="enviarInpunt()">
+    Enviar</ion-button>
+</ion-footer>
