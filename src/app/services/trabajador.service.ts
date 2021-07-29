@@ -1,13 +1,31 @@
 import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrabajadorService {
 
-  constructor() { }
+  constructor(private apollo: Apollo) { }
 
   allDirectorio(): any {
-    return "x"
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        {
+          allDirectorio {
+            Area
+            Cargo
+            Extencion
+            Titulo
+            NombreCompleto
+            Nombre
+            APaterno
+            Amaterno
+            Correo
+            Edificio
+            Piso
+          }
+        }`,
+    });
   }
 }

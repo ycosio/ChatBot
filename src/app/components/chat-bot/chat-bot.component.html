@@ -4,11 +4,14 @@
       <ion-button color="dark" (click)="closeModal()">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
+      <ion-button color="dark" (click)="minimizeModal()">
+        <ion-icon name="remove-circle-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>ChatBot</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content #chat>
   <div *ngFor="let item of stackMensajes;">
     <ion-item *ngIf="!item.Usuario" lines="none">
       <ion-chip>
@@ -17,7 +20,7 @@
     </ion-item>
     <ion-item *ngFor="let subMensaje of item.SubMensajes;"  lines="none">
       <ion-chip>
-        <ion-label color="secondary">{{ subMensaje.Mensaje }}</ion-label>
+        <ion-label color="secondary" (click)="seleccionarRespuesta(subMensaje.RespuestaMensaje, item)">{{ subMensaje.Mensaje }}</ion-label>
       </ion-chip>
     </ion-item>
     <ion-item *ngFor="let resultado of item.Resultados;"  lines="none">

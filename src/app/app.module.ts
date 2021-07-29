@@ -9,11 +9,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { ChatBotComponent } from './components/chat-bot/chat-bot.component';
 import { FormsModule } from '@angular/forms';
+import { ApolloModule } from './apollo/apollo.module';
 
 @NgModule({
   declarations: [AppComponent, ChatBotComponent],
   entryComponents: [],
-  imports: [BrowserModule, CommonModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ApolloModule,
+    FormsModule,
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
